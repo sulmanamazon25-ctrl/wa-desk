@@ -37,7 +37,8 @@ next-env.d.ts
 # Build / dist
 dist/
 release/
-public/release/*.exe
+public/release/*
+!public/release/.gitkeep
 resources/
 
 # License DB (VPS local JSON file store)

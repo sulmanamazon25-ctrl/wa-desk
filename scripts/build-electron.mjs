@@ -14,7 +14,6 @@ function deskEnvDefine() {
     "DESK_MARKETING_ORIGIN",
     "DESK_UPDATE_URL",
     "NEXT_PUBLIC_LICENSE_SERVER_URL",
-    "NEXT_PUBLIC_APP_URL",
   ];
   const define = {};
   for (const key of keys) {

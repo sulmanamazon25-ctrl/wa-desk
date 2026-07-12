@@ -2,7 +2,21 @@
 /** Quick smoke test for marketing site + API routes after VPS deploy */
 const base = (process.argv[2] || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").replace(/\/$/, "");
 
-const pages = ["/", "/pricing", "/download", "/contact", "/support", "/terms", "/privacy", "/acceptable-use"];
+const pages = [
+  "/",
+  "/pricing",
+  "/download",
+  "/contact",
+  "/support",
+  "/how-it-works",
+  "/for/small-business",
+  "/vs/wati",
+  "/vs/respond-io",
+  "/vs/interakt",
+  "/terms",
+  "/privacy",
+  "/acceptable-use",
+];
 const apis = [
   { path: "/api/license/validate", method: "GET", expect: [401, 403] },
   { path: "/api/stripe/checkout", method: "POST", body: { plan: "pro" }, expect: [200, 503, 500] },

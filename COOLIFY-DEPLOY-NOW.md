@@ -1,6 +1,6 @@
 # Deploy now (Plan B split) — Coolify Terminal
 
-SSH from GitHub Actions and your PC failed (`unable to authenticate`). Run these **inside Coolify → Server → Terminal** (or SSH with the key Coolify uses).
+SSH from GitHub Actions failed until `FRONT_VPS_SSH_KEY` is set to **`coolify_afanmoviles`** (works on `46.62.226.89`). `euronode_key` does **not** work on either server for automated deploy from PC.
 
 ## 1. API — 194.9.62.143 (WhatsApp AI Desk project only)
 

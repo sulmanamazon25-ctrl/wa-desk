@@ -9,6 +9,22 @@ export const metadata: Metadata = {
 
 const FAQ = [
   {
+    q: "Why desktop instead of cloud?",
+    a: "Your WhatsApp session and API keys stay on your PC. Cloud SaaS stores inbox data on vendor servers and charges per-seat platform fees. Desk is for operators who want control and transparent BYOK AI costs.",
+  },
+  {
+    q: "Why BYOK instead of bundled AI?",
+    a: "You see exactly what OpenRouter charges per model. We sell software (license + support), not marked-up AI credits. Typical SMB usage is a few dollars to tens of dollars per month on OpenRouter.",
+  },
+  {
+    q: "Why draft queue instead of full automation?",
+    a: "Customer-facing teams need a human approve step. Draft queue lets AI suggest replies — nothing sends until you click Send to WhatsApp. Safer than fully autonomous bots.",
+  },
+  {
+    q: "When should I use official WhatsApp API instead?",
+    a: "If you need multi-agent team inbox, CRM integrations, broadcast campaigns at scale, or Meta compliance workflows — use a cloud platform (see our /vs pages). Desk is for solo/small teams on one PC session.",
+  },
+  {
     q: "Do I need Node.js?",
     a: "No. Clients use the Windows installer only. Node/npm is for developers building from source.",
   },

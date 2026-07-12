@@ -110,12 +110,67 @@ export default function PricingPage() {
         </div>
 
         <section className="mx-auto mt-16 max-w-3xl rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 text-sm text-zinc-400">
+          <h2 className="text-lg font-semibold text-white">How this compares to cloud WhatsApp SaaS</h2>
+          <p className="mt-3">
+            Cloud platforms (Wati, Respond.io, Interakt, etc.) charge per-seat subscriptions, often bundle or mark up AI
+            credits, and store your inbox on their servers. WhatsApp AI Desk is a{" "}
+            <strong className="text-zinc-200">software license</strong> for a desktop app — you bring your own OpenRouter
+            key and keep sessions local.
+          </p>
+          <p className="mt-3">
+            <strong className="text-zinc-200">Lifetime $499</strong> is popular with agencies standardizing one Windows desk
+            per operator — no recurring software fee, just OpenRouter usage.
+          </p>
+          <p className="mt-4">
+            <Link href="/vs/wati" className="text-emerald-400 hover:underline">
+              Compare vs Wati
+            </Link>
+            {" · "}
+            <Link href="/vs/respond-io" className="text-emerald-400 hover:underline">
+              vs Respond.io
+            </Link>
+            {" · "}
+            <Link href="/vs/interakt" className="text-emerald-400 hover:underline">
+              vs Interakt
+            </Link>
+          </p>
+        </section>
+
+        <section className="mx-auto mt-8 max-w-3xl rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 text-sm text-zinc-400">
           <h2 className="text-lg font-semibold text-white">OpenRouter (BYOK)</h2>
           <p className="mt-3">
             After purchase you receive a <strong className="text-zinc-200">license key</strong> by email. Install the app, activate,
             then add your OpenRouter key under Setup → API keys → Save + Test. Typical AI cost is a few dollars to tens of dollars
             per month depending on message volume.
           </p>
+        </section>
+
+        <section className="mx-auto mt-8 max-w-3xl rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8">
+          <h2 className="text-lg font-semibold text-white">Pricing FAQ</h2>
+          <dl className="mt-4 space-y-4 text-sm text-zinc-400">
+            <div>
+              <dt className="font-medium text-zinc-200">Is WhatsApp official?</dt>
+              <dd className="mt-1">
+                No — we use whatsapp-web.js (unofficial). Use a dedicated business number. See{" "}
+                <Link href="/acceptable-use" className="text-emerald-400 hover:underline">
+                  Acceptable use
+                </Link>
+                .
+              </dd>
+            </div>
+            <div>
+              <dt className="font-medium text-zinc-200">How much does OpenRouter cost?</dt>
+              <dd className="mt-1">
+                Typically $5–20/mo for light SMB volume; scales with messages. Billed by OpenRouter, not us.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-medium text-zinc-200">One device per license?</dt>
+              <dd className="mt-1">
+                Yes — license binds on first activation. Email support for transfers.
+              </dd>
+            </div>
+          </dl>
         </section>
       </main>
     </MarketingShell>

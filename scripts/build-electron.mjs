@@ -8,6 +8,22 @@ const root = path.join(__dirname, "..");
 
 await mkdir(path.join(root, "dist-electron"), { recursive: true });
 
+function deskEnvDefine() {
+  const keys = [
+    "DESK_LICENSE_SERVER_URL",
+    "DESK_MARKETING_ORIGIN",
+    "DESK_UPDATE_URL",
+    "NEXT_PUBLIC_LICENSE_SERVER_URL",
+    "NEXT_PUBLIC_APP_URL",
+  ];
+  const define = {};
+  for (const key of keys) {
+    const value = process.env[key]?.trim() || "";
+    define[`process.env.${key}`] = JSON.stringify(value);
+  }
+  return define;
+}
+
 const common = {
   bundle: true,
   platform: "node",
@@ -15,6 +31,7 @@ const common = {
   sourcemap: true,
   logLevel: "info",
   packages: "external",
+  define: deskEnvDefine(),
 };
 
 await esbuild.build({

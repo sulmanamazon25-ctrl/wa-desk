@@ -12,6 +12,7 @@
     "build:electron": "node scripts/build-electron.mjs",
     "build": "npm run build:electron && next build",
     "dist:win": "node scripts/dist-win.mjs",
+    "dist:win:split": "cross-env DESK_LICENSE_SERVER_URL=https://api.wasup.com DESK_MARKETING_ORIGIN=https://wasup.com DESK_UPDATE_URL=https://wasup.com/release/ CSC_IDENTITY_AUTO_DISCOVERY=false node scripts/dist-win.mjs",
     "prepare:standalone": "node scripts/prepare-standalone.mjs",
     "start": "next start -p 3000",
     "lint": "next lint",

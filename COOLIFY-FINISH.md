@@ -1,41 +1,21 @@
-# Finish deploy — WhatsApp AI Desk on Coolify (2 minutes)
+# Finish deploy — run this in Coolify Terminal
 
-Repo: **https://github.com/sulmanamazon25-ctrl/wa-desk** (private)
+Open **Coolify** → left sidebar **Terminal** → select server **194.9.62.143** → paste:
 
-GitHub Actions builds the Docker image automatically → `ghcr.io/sulmanamazon25-ctrl/wa-desk:latest`
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/sulmanamazon25-ctrl/wa-desk/master/deploy/wa-desk/coolify-terminal-deploy.sh)"
+```
 
----
-
-## Option A — Paste compose (easiest, no Git in Coolify)
-
-1. Open your **WhatsApp AI Desk** resource in Coolify
-2. **Replace** the Docker Compose editor content with the file:
-   `deploy/wa-desk/docker-compose.coolify-ready.yml` from the repo
-3. **Environment** → paste from your local `deploy/wa-desk/coolify-env-paste.txt`
-   (if missing: `copy deploy\wa-desk\coolify-env-paste.example.txt deploy\wa-desk\coolify-env-paste.txt` and fill secrets)
-4. **Ports** → **3025** public
-5. **Deploy** / **Redeploy**
-6. Wait for GitHub Actions to finish first (image must exist):  
-   https://github.com/sulmanamazon25-ctrl/wa-desk/actions
+This will:
+- Ensure Docker is running
+- Clone/update `wa-desk` to `/opt/wa-desk`
+- Build the **server-only** image (no Puppeteer/Electron)
+- Start isolated Postgres + app on **port 3025**
+- Not touch DownItX + Pinquill
 
 ---
 
-## Option B — Git source in Coolify
-
-| Field | Value |
-|-------|--------|
-| Repository | `https://github.com/sulmanamazon25-ctrl/wa-desk` |
-| Branch | `master` |
-| Compose file | `deploy/wa-desk/docker-compose.yml` |
-| Base directory | `/` (repo root) |
-
-Add Coolify deploy key to GitHub repo → Settings → Deploy keys.
-
-Same env vars + port **3025** → Deploy.
-
----
-
-## Verify (your PC)
+## After it finishes (your PC)
 
 ```powershell
 cd D:\whatsapp-ai-desktop
@@ -45,16 +25,17 @@ npm run admin:license -- --email you@example.com --plan lifetime
 
 ---
 
-## Desktop installer
+## If Coolify resource already exists
 
-```powershell
-set DESK_LICENSE_SERVER_URL=http://194.9.62.143:3025
-npm run dist:win
-```
+You can still run the terminal script — it uses Docker Compose directly on the host (`/opt/wa-desk`), separate from other Coolify projects.
+
+Or update your Coolify compose resource:
+- File: `deploy/wa-desk/docker-compose.coolify-ready.yml` (pulls GHCR image)
+- Env: `deploy/wa-desk/coolify-env-paste.txt` (local, gitignored)
+- Port: **3025**
 
 ---
 
-## Safety
+## SSH note
 
-- Project: **WhatsApp AI Desk** only (not DownItX + Pinquill)
-- Port: **3025** only (3010 = Supabase, 8000 = Coolify)
+If you use Remote-SSH (`euronode_key`), ensure the public key is in `/root/.ssh/authorized_keys` on the server. Current keys on this PC were rejected.

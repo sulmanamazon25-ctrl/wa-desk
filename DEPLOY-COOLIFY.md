@@ -1,4 +1,4 @@
-# Deploy WhatsApp AI Desk on Coolify (194.9.62.143)
+# Split deploy: see DEPLOY-SPLIT.md
 
 > **Start here:** [COOLIFY-SETUP.md](COOLIFY-SETUP.md) — step-by-step with screenshots.  
 > **Important:** create a **new** project `WhatsApp AI Desk`. Do **not** add resources inside `DownItX + Pinquill`.

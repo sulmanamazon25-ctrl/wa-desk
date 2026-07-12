@@ -1,0 +1,23 @@
+name: Deploy frontend to 46.62.226.89
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: 46.62.226.89
+          username: root
+          key: ${{ secrets.FRONT_VPS_SSH_KEY }}
+          script_stop: true
+          script: |
+            set -euo pipefail
+            systemctl enable docker
+            systemctl start docker
+            bash -c "$(curl -fsSL https://raw.githubusercontent.com/sulmanamazon25-ctrl/wa-desk/master/deploy/wa-front/coolify-terminal-deploy.sh)"

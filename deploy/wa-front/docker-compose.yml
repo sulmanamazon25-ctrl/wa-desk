@@ -1,0 +1,26 @@
+# Marketing website only — deploy on 46.62.226.89 (existing Coolify project).
+# API lives on 194.9.62.143 (deploy/wa-desk).
+
+name: wa-front-stack
+
+services:
+  wa-front:
+    build:
+      context: ../..
+      dockerfile: deploy/wa-front/Dockerfile
+      args:
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://46.62.226.89:3025}
+        NEXT_PUBLIC_API_ORIGIN: ${NEXT_PUBLIC_API_ORIGIN:-http://194.9.62.143:3025}
+        NEXT_PUBLIC_DOWNLOAD_URL: ${NEXT_PUBLIC_DOWNLOAD_URL:-http://46.62.226.89:3025/download}
+    container_name: wa-front-app
+    restart: unless-stopped
+    ports:
+      - "3025:3025"
+    environment:
+      NODE_ENV: production
+      PORT: 3025
+      HOSTNAME: 0.0.0.0
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://46.62.226.89:3025}
+      NEXT_PUBLIC_API_ORIGIN: ${NEXT_PUBLIC_API_ORIGIN:-http://194.9.62.143:3025}
+      NEXT_PUBLIC_DOWNLOAD_URL: ${NEXT_PUBLIC_DOWNLOAD_URL:-http://46.62.226.89:3025/download}
+      NEXT_PUBLIC_CRISP_WEBSITE_ID: ${NEXT_PUBLIC_CRISP_WEBSITE_ID:-}

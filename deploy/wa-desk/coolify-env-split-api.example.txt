@@ -1,5 +1,5 @@
-# Copy to coolify-env-paste.txt locally (gitignored) or paste into Coolify Environment tab.
-# Generate secrets: npm run gen:coolify-secrets
+# VPS API server (194.9.62.143) — split deploy Plan B
+# Copy secrets to coolify-env-paste.txt locally
 
 WA_DB_PASSWORD=change-me
 LICENSE_SIGNING_SECRET=change-me-32-chars-minimum
@@ -8,11 +8,9 @@ ADMIN_API_KEY=change-me-admin-key
 NODE_ENV=production
 PORT=3025
 HOSTNAME=0.0.0.0
-# Marketing site URL (Stripe success/cancel redirects)
 NEXT_PUBLIC_APP_URL=https://wasup.com
 DATABASE_URL=postgresql://wa_desk:change-me@wa-db:5432/wa_desk
 DOWNLOAD_URL=https://wasup.com/download
-# Split deploy: allow browser calls from frontend server
 CORS_ALLOWED_ORIGINS=https://wasup.com,http://46.62.226.89:3025
 
 STRIPE_SECRET_KEY=
@@ -22,5 +20,5 @@ STRIPE_PRICE_BUSINESS_YEARLY=
 STRIPE_PRICE_LIFETIME=
 
 RESEND_API_KEY=
-CONTACT_FROM_EMAIL=WhatsApp AI Desk <hello@yourdomain.com>
-CONTACT_INBOX_EMAIL=support@yourdomain.com
+CONTACT_FROM_EMAIL=WhatsApp AI Desk <hello@wasup.com>
+CONTACT_INBOX_EMAIL=support@wasup.com

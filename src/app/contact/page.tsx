@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { MarketingShell } from "@/components/marketing/MarketingShell";
+import { apiUrl } from "@/lib/api-origin";
 
 export default function ContactPage() {
   const [name, setName] = React.useState("");
@@ -24,7 +25,7 @@ export default function ContactPage() {
     setBusy(true);
     setErr(null);
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(apiUrl("/api/contact"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message, plan }),

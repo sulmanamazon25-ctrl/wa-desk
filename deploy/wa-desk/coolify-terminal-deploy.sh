@@ -18,8 +18,9 @@ ADMIN_API_KEY=ff37fadfde6ecef0d37c98850fc717c6b84024e94ee8c768dd489fab10d5056d
 NODE_ENV=production
 PORT=3025
 HOSTNAME=0.0.0.0
-NEXT_PUBLIC_APP_URL=http://194.9.62.143:3025
-DOWNLOAD_URL=http://194.9.62.143:3025/download
+NEXT_PUBLIC_APP_URL=http://wasup.com
+DOWNLOAD_URL=http://wasup.com/download
+CORS_ALLOWED_ORIGINS=http://46.62.226.89:3025,http://wasup.com
 EOF
 
 systemctl enable docker
@@ -35,4 +36,4 @@ docker compose -f deploy/wa-desk/docker-compose.yml --env-file deploy/wa-desk/.e
 docker compose -f deploy/wa-desk/docker-compose.yml --env-file deploy/wa-desk/.env up -d --build
 
 docker compose -f deploy/wa-desk/docker-compose.yml ps
-curl -fsS http://127.0.0.1:3025/pricing && echo " OK"
+curl -fsS -o /dev/null -w "%{http_code}" http://127.0.0.1:3025/api/license/validate || true

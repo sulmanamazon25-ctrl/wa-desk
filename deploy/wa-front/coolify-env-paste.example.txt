@@ -1,0 +1,19 @@
+# Coolify → existing project on 46.62.226.89 → Environment
+# Compose: deploy/wa-front/docker-compose.yml
+# No Stripe/DB secrets on this server.
+
+NODE_ENV=production
+PORT=3025
+HOSTNAME=0.0.0.0
+
+# IP phase (before wasup.com)
+NEXT_PUBLIC_APP_URL=http://46.62.226.89:3025
+NEXT_PUBLIC_API_ORIGIN=http://194.9.62.143:3025
+NEXT_PUBLIC_DOWNLOAD_URL=http://46.62.226.89:3025/download
+
+# Domain phase (after wasup.com + SSL) — uncomment and redeploy:
+# NEXT_PUBLIC_APP_URL=https://wasup.com
+# NEXT_PUBLIC_API_ORIGIN=https://api.wasup.com
+# NEXT_PUBLIC_DOWNLOAD_URL=https://wasup.com/download
+
+# NEXT_PUBLIC_CRISP_WEBSITE_ID=

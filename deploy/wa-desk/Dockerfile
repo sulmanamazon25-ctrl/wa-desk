@@ -1,15 +1,18 @@
-# WhatsApp AI Desk — isolated production image (Coolify / Docker)
+# WhatsApp AI Desk — server-only image (marketing + license API, no Electron/Puppeteer)
 FROM node:20-alpine AS deps
 WORKDIR /app
+ENV PUPPETEER_SKIP_DOWNLOAD=true
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build
+ENV PUPPETEER_SKIP_DOWNLOAD=true
+RUN npx next build
 RUN cp -r .next/static .next/standalone/.next/static \
   && cp -r public .next/standalone/public
 

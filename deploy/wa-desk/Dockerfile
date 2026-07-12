@@ -13,8 +13,9 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 RUN npx next build
-RUN cp -r .next/static .next/standalone/.next/static \
-  && cp -r public .next/standalone/public
+RUN mkdir -p .next/standalone/.next \
+  && cp -r .next/static .next/standalone/.next/static \
+  && if [ -d public ]; then cp -r public .next/standalone/public; else mkdir -p .next/standalone/public; fi
 
 FROM node:20-alpine AS runner
 WORKDIR /app

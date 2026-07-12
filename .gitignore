@@ -36,7 +36,7 @@ next-env.d.ts
 
 # Build / dist
 dist/
-release/
+/release/
 public/release/*
 !public/release/.gitkeep
 resources/

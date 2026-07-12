@@ -1,41 +1,63 @@
-# Finish deploy — run this in Coolify Terminal
+# Finish deploy — wa-desk on port 3025
 
-Open **Coolify** → left sidebar **Terminal** → select server **194.9.62.143** → paste:
+## Current status (checked)
+
+| Check | Result |
+|-------|--------|
+| `194.9.62.143:3025` | **Not open** — app not deployed yet |
+| `194.9.62.143:3010` | Open (Supabase — do not use) |
+| SSH from this PC | **Blocked** — keys not in server `authorized_keys` |
+| GitHub Actions deploy | Failed — same SSH auth issue |
+| Docker image (GHCR) | Built successfully (private) |
+
+---
+
+## Option A — Coolify resource (recommended if you already added one)
+
+In **WhatsApp AI Desk** project → your Docker Compose resource:
+
+1. **Source** → Public Git: `https://github.com/sulmanamazon25-ctrl/wa-desk`
+2. **Branch**: `master`
+3. **Compose file**: `deploy/wa-desk/docker-compose.yml`
+4. **Environment** — paste from local `deploy/wa-desk/coolify-env-paste.txt`
+5. **Ports**: expose **3025** (public)
+6. Click **Deploy** / **Redeploy**
+
+Coolify builds on the server (no SSH from your PC needed).
+
+---
+
+## Option B — Coolify Terminal (one line)
+
+Coolify → **Terminal** → paste:
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/sulmanamazon25-ctrl/wa-desk/master/deploy/wa-desk/coolify-terminal-deploy.sh)"
 ```
 
-This will:
-- Ensure Docker is running
-- Clone/update `wa-desk` to `/opt/wa-desk`
-- Build the **server-only** image (no Puppeteer/Electron)
-- Start isolated Postgres + app on **port 3025**
-- Not touch DownItX + Pinquill
-
 ---
 
-## After it finishes (your PC)
+## After deploy succeeds (your PC)
 
 ```powershell
 cd D:\whatsapp-ai-desktop
 npm run wait:deploy
 npm run admin:license -- --email you@example.com --plan lifetime
+set DESK_LICENSE_SERVER_URL=http://194.9.62.143:3025
+npm run dist:win
 ```
 
 ---
 
-## If Coolify resource already exists
+## Fix SSH for future (optional)
 
-You can still run the terminal script — it uses Docker Compose directly on the host (`/opt/wa-desk`), separate from other Coolify projects.
+In Coolify Terminal on the server, add your PC public key:
 
-Or update your Coolify compose resource:
-- File: `deploy/wa-desk/docker-compose.coolify-ready.yml` (pulls GHCR image)
-- Env: `deploy/wa-desk/coolify-env-paste.txt` (local, gitignored)
-- Port: **3025**
+```bash
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
+# paste your euronode_key.pub line into authorized_keys
+nano ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+```
 
----
-
-## SSH note
-
-If you use Remote-SSH (`euronode_key`), ensure the public key is in `/root/.ssh/authorized_keys` on the server. Current keys on this PC were rejected.
+Then GitHub Action `Deploy to VPS` will work from Actions tab.

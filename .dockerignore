@@ -1,0 +1,15 @@
+node_modules
+.next
+release
+dist-electron
+resources
+.git
+.env
+.env.*
+!.env.production.example
+!.env.admin.local.example
+deploy/wa-desk/.env
+data
+*.log
+.wwebjs_auth
+.wwebjs_cache

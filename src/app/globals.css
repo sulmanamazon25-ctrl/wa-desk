@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --desk-sidebar-width: 15rem;
+  --desk-radius: 0.75rem;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  @apply bg-surface text-zinc-100 antialiased;
+  background-image: linear-gradient(180deg, #080b10 0%, #0b0f14 50%, #07090d 100%);
+  background-attachment: fixed;
+}
+
+.desk-page-scroll {
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.desk-card {
+  border-radius: var(--desk-radius);
+}
+
+::selection {
+  @apply bg-accent/30 text-white;
+}

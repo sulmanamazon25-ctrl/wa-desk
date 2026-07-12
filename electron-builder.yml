@@ -1,0 +1,29 @@
+appId: com.whatsapp-ai-desk.app
+productName: WhatsApp AI Desk
+copyright: Copyright © WhatsApp AI Desk
+directories:
+  output: release
+  buildResources: build
+files:
+  - dist-electron/**/*
+  - package.json
+extraResources:
+  - from: resources/standalone
+    to: standalone
+    filter:
+      - "**/*"
+win:
+  target:
+    - nsis
+  artifactName: "${productName}-Setup-${version}.${ext}"
+  signAndEditExecutable: false
+nsis:
+  oneClick: true
+  perMachine: false
+  allowToChangeInstallationDirectory: false
+  createDesktopShortcut: true
+  shortcutName: WhatsApp AI Desk
+  uninstallDisplayName: WhatsApp AI Desk
+publish:
+  provider: generic
+  url: https://example.com/release/

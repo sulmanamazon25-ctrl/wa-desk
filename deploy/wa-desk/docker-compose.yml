@@ -1,0 +1,64 @@
+# Isolated WhatsApp AI Desk stack — do NOT add to "DownItX + Pinquill" project.
+# Deploy as a NEW Coolify project. Own network, own volume, port 3025 only.
+
+name: wa-desk-stack
+
+services:
+  wa-db:
+    image: postgres:16-alpine
+    container_name: wa-desk-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: wa_desk
+      POSTGRES_USER: wa_desk
+      POSTGRES_PASSWORD: ${WA_DB_PASSWORD:?Set WA_DB_PASSWORD in Coolify env}
+    volumes:
+      - wa_desk_pgdata:/var/lib/postgresql/data
+    networks:
+      - wa_desk_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wa_desk -d wa_desk"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # No host ports — database stays internal
+
+  wa-desk:
+    build:
+      context: ../..
+      dockerfile: deploy/wa-desk/Dockerfile
+    container_name: wa-desk-app
+    restart: unless-stopped
+    depends_on:
+      wa-db:
+        condition: service_healthy
+    ports:
+      - "3025:3025"
+    environment:
+      NODE_ENV: production
+      PORT: 3025
+      HOSTNAME: 0.0.0.0
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://194.9.62.143:3025}
+      DATABASE_URL: postgresql://wa_desk:${WA_DB_PASSWORD}@wa-db:5432/wa_desk
+      LICENSE_SIGNING_SECRET: ${LICENSE_SIGNING_SECRET:?Set LICENSE_SIGNING_SECRET}
+      ADMIN_API_KEY: ${ADMIN_API_KEY:?Set ADMIN_API_KEY}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
+      STRIPE_PRICE_PRO_MONTHLY: ${STRIPE_PRICE_PRO_MONTHLY:-}
+      STRIPE_PRICE_BUSINESS_YEARLY: ${STRIPE_PRICE_BUSINESS_YEARLY:-}
+      STRIPE_PRICE_LIFETIME: ${STRIPE_PRICE_LIFETIME:-}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      CONTACT_FROM_EMAIL: ${CONTACT_FROM_EMAIL:-}
+      CONTACT_INBOX_EMAIL: ${CONTACT_INBOX_EMAIL:-}
+      DOWNLOAD_URL: ${DOWNLOAD_URL:-http://194.9.62.143:3025/download}
+    networks:
+      - wa_desk_net
+
+networks:
+  wa_desk_net:
+    name: wa_desk_net
+    driver: bridge
+
+volumes:
+  wa_desk_pgdata:
+    name: wa_desk_pgdata

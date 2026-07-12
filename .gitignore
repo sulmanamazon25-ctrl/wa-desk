@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Electron bundle
+dist-electron/
+
+# Env
+.env
+deploy/wa-desk/.env
+deploy/wa-desk/coolify-env-paste.txt
+.env.local
+.env.admin.local
+.env.*.local
+
+# Local API secrets (normally under Electron userData; ignore if copied into repo)
+**/app-secrets.json
+
+# WhatsApp session (local-first; never commit)
+.wwebjs_auth/
+.wwebjs_cache/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Build / dist
+dist/
+release/
+resources/
+
+# License DB (VPS local JSON file store)
+data/
+licenses.json

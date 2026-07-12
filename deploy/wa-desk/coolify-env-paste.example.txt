@@ -1,0 +1,23 @@
+# Copy to coolify-env-paste.txt locally (gitignored) or paste into Coolify Environment tab.
+# Generate secrets: npm run gen:coolify-secrets
+
+WA_DB_PASSWORD=change-me
+LICENSE_SIGNING_SECRET=change-me-32-chars-minimum
+ADMIN_API_KEY=change-me-admin-key
+
+NODE_ENV=production
+PORT=3025
+HOSTNAME=0.0.0.0
+NEXT_PUBLIC_APP_URL=http://194.9.62.143:3025
+DATABASE_URL=postgresql://wa_desk:change-me@wa-db:5432/wa_desk
+DOWNLOAD_URL=http://194.9.62.143:3025/download
+
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+STRIPE_PRICE_PRO_MONTHLY=
+STRIPE_PRICE_BUSINESS_YEARLY=
+STRIPE_PRICE_LIFETIME=
+
+RESEND_API_KEY=
+CONTACT_FROM_EMAIL=WhatsApp AI Desk <hello@yourdomain.com>
+CONTACT_INBOX_EMAIL=support@yourdomain.com

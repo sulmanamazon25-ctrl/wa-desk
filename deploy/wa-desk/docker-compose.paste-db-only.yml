@@ -1,0 +1,32 @@
+# Paste this in Coolify if you are NOT using Git yet — Postgres only (safe, isolated).
+# App (wa-desk) should be added as a separate Git/Dockerfile resource on port 3025.
+
+name: wa-desk-db
+
+services:
+  wa-db:
+    image: postgres:16-alpine
+    container_name: wa-desk-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: wa_desk
+      POSTGRES_USER: wa_desk
+      POSTGRES_PASSWORD: ${WA_DB_PASSWORD:?Set WA_DB_PASSWORD in Coolify env}
+    volumes:
+      - wa_desk_pgdata:/var/lib/postgresql/data
+    networks:
+      - wa_desk_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wa_desk -d wa_desk"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  wa_desk_net:
+    name: wa_desk_net
+    driver: bridge
+
+volumes:
+  wa_desk_pgdata:
+    name: wa_desk_pgdata

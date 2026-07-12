@@ -31,8 +31,7 @@ jobs:
             ghcr.io/sulmanamazon25-ctrl/wa-desk:${{ github.sha }}
 
       - name: Make package public for Coolify pull
-        run: |
-          PACKAGE_VERSION_ID=$(gh api "/users/sulmanamazon25-ctrl/packages/container/wa-desk/versions" --jq '.[0].id')
-          gh api -X PATCH "/users/sulmanamazon25-ctrl/packages/container/wa-desk/versions/${PACKAGE_VERSION_ID}" -f visibility=public
+        continue-on-error: true
+        run: gh api --method PATCH /user/packages/container/wa-desk -f visibility=public
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

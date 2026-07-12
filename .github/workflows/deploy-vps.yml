@@ -1,0 +1,43 @@
+name: Deploy to VPS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: 194.9.62.143
+          username: root
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script_stop: true
+          script: |
+            set -euo pipefail
+            systemctl enable docker
+            systemctl start docker
+            docker version
+            mkdir -p /opt/wa-desk && cd /opt/wa-desk
+            if [ ! -d .git ]; then
+              git clone https://github.com/sulmanamazon25-ctrl/wa-desk.git .
+            else
+              git fetch origin && git reset --hard origin/master
+            fi
+            cat > deploy/wa-desk/.env <<'ENVEOF'
+            WA_DB_PASSWORD=20Zano9MYQuZgKDupH0ES0dgGWl2t6lG
+            LICENSE_SIGNING_SECRET=9269452fa3d220ca5ac7c35d0d6f3978995fd3dc68a3ad7da58d8384999c6d6c
+            ADMIN_API_KEY=ff37fadfde6ecef0d37c98850fc717c6b84024e94ee8c768dd489fab10d5056d
+            NODE_ENV=production
+            PORT=3025
+            HOSTNAME=0.0.0.0
+            NEXT_PUBLIC_APP_URL=http://194.9.62.143:3025
+            DOWNLOAD_URL=http://194.9.62.143:3025/download
+            ENVEOF
+            docker compose -f deploy/wa-desk/docker-compose.yml --env-file deploy/wa-desk/.env down || true
+            docker compose -f deploy/wa-desk/docker-compose.yml --env-file deploy/wa-desk/.env up -d --build
+            docker compose -f deploy/wa-desk/docker-compose.yml ps
+            curl -fsS http://127.0.0.1:3025/pricing

@@ -24,6 +24,12 @@ EOF
 
 systemctl enable docker
 systemctl start docker
+if ! docker info >/dev/null 2>&1; then
+  echo "Docker not responding — restarting..."
+  systemctl restart docker
+  sleep 3
+fi
+docker version
 
 docker compose -f deploy/wa-desk/docker-compose.yml --env-file deploy/wa-desk/.env down || true
 docker compose -f deploy/wa-desk/docker-compose.yml --env-file deploy/wa-desk/.env up -d --build

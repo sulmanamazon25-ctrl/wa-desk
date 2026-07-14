@@ -20,6 +20,7 @@
     "smoke:marketing": "node scripts/smoke-marketing.mjs",
     "setup:stripe": "node scripts/setup-stripe-billing.mjs",
     "deploy:billing-env": "node scripts/deploy-billing-env.mjs",
+    "sync:api-env": "node scripts/sync-api-env.mjs",
     "verify:billing": "node scripts/verify-billing.mjs",
     "verify:resend": "node scripts/verify-resend.mjs",
     "admin:license": "node scripts/create-admin-license.mjs",

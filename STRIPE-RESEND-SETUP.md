@@ -6,7 +6,14 @@ All billing and email runs on the **API server** (`194.9.62.143` / `https://api.
 
 ## Quick automate (recommended)
 
-### 1. Create local secrets file
+**Important:** If you deployed the API via SSH (`/opt/wa-desk`), Coolify’s Environment tab does **not** update the running container unless that same Coolify resource owns the deploy. Copy your live keys into local `deploy/wa-desk/coolify-env-paste.txt`, then:
+
+```powershell
+npm run sync:api-env
+npm run verify:billing
+```
+
+### 1. Create local secrets file (alternative)
 
 ```powershell
 cd D:\whatsapp-ai-desktop

@@ -35,5 +35,9 @@ docker version
 docker compose -f deploy/wa-desk/docker-compose.yml --env-file deploy/wa-desk/.env down || true
 docker compose -f deploy/wa-desk/docker-compose.yml --env-file deploy/wa-desk/.env up -d --build
 
+# Billing (Stripe + Resend): add keys to deploy/wa-desk/.env then redeploy wa-desk only.
+# Or from PC: npm run setup:stripe && npm run deploy:billing-env
+# See STRIPE-RESEND-SETUP.md
+
 docker compose -f deploy/wa-desk/docker-compose.yml ps
 curl -fsS -o /dev/null -w "%{http_code}" http://127.0.0.1:3025/api/license/validate || true

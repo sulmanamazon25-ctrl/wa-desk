@@ -14,6 +14,7 @@ deploy/wa-desk/.env
 deploy/wa-desk/coolify-env-paste.txt
 .env.local
 .env.admin.local
+.env.billing.local
 .env.*.local
 
 # Local API secrets (normally under Electron userData; ignore if copied into repo)

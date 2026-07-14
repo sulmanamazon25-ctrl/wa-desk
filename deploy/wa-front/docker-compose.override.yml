@@ -1,0 +1,31 @@
+﻿services:
+  wa-front:
+    networks:
+      - coolify
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=coolify
+      - traefik.http.routers.wa-front-http-0.entryPoints=http
+      - traefik.http.routers.wa-front-http-0.middlewares=redirect-to-https
+      - traefik.http.routers.wa-front-http-0.rule=Host(`wasup.app`) && PathPrefix(`/`)
+      - traefik.http.routers.wa-front-http-0.service=wa-front-svc
+      - traefik.http.routers.wa-front-http-1.entryPoints=http
+      - traefik.http.routers.wa-front-http-1.middlewares=redirect-to-https
+      - traefik.http.routers.wa-front-http-1.rule=Host(`www.wasup.app`) && PathPrefix(`/`)
+      - traefik.http.routers.wa-front-http-1.service=wa-front-svc
+      - traefik.http.routers.wa-front-https-0.entryPoints=https
+      - traefik.http.routers.wa-front-https-0.middlewares=gzip
+      - traefik.http.routers.wa-front-https-0.rule=Host(`wasup.app`) && PathPrefix(`/`)
+      - traefik.http.routers.wa-front-https-0.service=wa-front-svc
+      - traefik.http.routers.wa-front-https-0.tls=true
+      - traefik.http.routers.wa-front-https-0.tls.certresolver=letsencrypt
+      - traefik.http.routers.wa-front-https-1.entryPoints=https
+      - traefik.http.routers.wa-front-https-1.middlewares=gzip
+      - traefik.http.routers.wa-front-https-1.rule=Host(`www.wasup.app`) && PathPrefix(`/`)
+      - traefik.http.routers.wa-front-https-1.service=wa-front-svc
+      - traefik.http.routers.wa-front-https-1.tls=true
+      - traefik.http.routers.wa-front-https-1.tls.certresolver=letsencrypt
+      - traefik.http.services.wa-front-svc.loadbalancer.server.port=3025
+networks:
+  coolify:
+    external: true

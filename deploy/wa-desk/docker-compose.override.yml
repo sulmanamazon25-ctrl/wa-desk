@@ -1,0 +1,21 @@
+﻿services:
+  wa-desk:
+    networks:
+      - coolify
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=coolify
+      - traefik.http.routers.wa-desk-http-0.entryPoints=http
+      - traefik.http.routers.wa-desk-http-0.middlewares=redirect-to-https
+      - traefik.http.routers.wa-desk-http-0.rule=Host(`api.wasup.app`) && PathPrefix(`/`)
+      - traefik.http.routers.wa-desk-http-0.service=wa-desk-svc
+      - traefik.http.routers.wa-desk-https-0.entryPoints=https
+      - traefik.http.routers.wa-desk-https-0.middlewares=gzip
+      - traefik.http.routers.wa-desk-https-0.rule=Host(`api.wasup.app`) && PathPrefix(`/`)
+      - traefik.http.routers.wa-desk-https-0.service=wa-desk-svc
+      - traefik.http.routers.wa-desk-https-0.tls=true
+      - traefik.http.routers.wa-desk-https-0.tls.certresolver=letsencrypt
+      - traefik.http.services.wa-desk-svc.loadbalancer.server.port=3025
+networks:
+  coolify:
+    external: true

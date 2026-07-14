@@ -7,7 +7,7 @@
 | **46.62.226.89** | Marketing site only | `deploy/wa-front/docker-compose.yml` | 3025 |
 | **194.9.62.143** | API + Postgres | `deploy/wa-desk/docker-compose.yml` | 3025 |
 
-Final domains: `wasup.com` (front) · `api.wasup.com` (API)
+Final domains: `wasup.app` (front) · `api.wasup.app` (API)
 
 ---
 
@@ -18,7 +18,7 @@ Coolify → **WhatsApp AI Desk** project (not DownItX + Pinquill):
 - Git: `https://github.com/sulmanamazon25-ctrl/wa-desk`
 - Compose: `deploy/wa-desk/docker-compose.yml`
 - Env: `deploy/wa-desk/coolify-env-paste.example.txt` (+ your secrets)
-- **Required for split:** `CORS_ALLOWED_ORIGINS`, `NEXT_PUBLIC_APP_URL=https://wasup.com`
+- **Required for split:** `CORS_ALLOWED_ORIGINS`, `NEXT_PUBLIC_APP_URL=https://wasup.app`
 - Port **3025** public
 
 **Or Terminal on 194.9.62.143:**
@@ -58,42 +58,43 @@ node scripts/smoke-marketing.mjs http://46.62.226.89:3025
 
 ---
 
-## 3. wasup.com + SSL (when domain is purchased)
+## 3. wasup.app + SSL
 
-| DNS | Points to |
-|-----|-----------|
-| `A` `@` | `46.62.226.89` |
-| `A` `api` | `194.9.62.143` |
+| DNS | Points to | Notes |
+|-----|-----------|-------|
+| `A` `@` | `46.62.226.89` | Apex / frontend |
+| `CNAME` `www` | `wasup.app` | www subdomain |
+| `A` `api` | `194.9.62.143` | API subdomain |
 
-Coolify: add domains + Let's Encrypt on each resource.
+Coolify SSL: see [DOMAIN-WASUP.md](./DOMAIN-WASUP.md) for step-by-step (add `wasup.app` + `www.wasup.app` on frontend; `api.wasup.app` on API).
 
 **Frontend env (46.62):**
 
 ```env
-NEXT_PUBLIC_APP_URL=https://wasup.com
-NEXT_PUBLIC_API_ORIGIN=https://api.wasup.com
-NEXT_PUBLIC_DOWNLOAD_URL=https://wasup.com/download
+NEXT_PUBLIC_APP_URL=https://wasup.app
+NEXT_PUBLIC_API_ORIGIN=https://api.wasup.app
+NEXT_PUBLIC_DOWNLOAD_URL=https://wasup.app/download
 ```
 
 **API env (194.9):**
 
 ```env
-NEXT_PUBLIC_APP_URL=https://wasup.com
-DOWNLOAD_URL=https://wasup.com/download
-CORS_ALLOWED_ORIGINS=https://wasup.com
+NEXT_PUBLIC_APP_URL=https://wasup.app
+DOWNLOAD_URL=https://wasup.app/download
+CORS_ALLOWED_ORIGINS=https://wasup.app,https://www.wasup.app
 ```
 
 Redeploy both.
 
-**Stripe webhook:** `https://api.wasup.com/api/stripe/webhook` (event: `checkout.session.completed`)
+**Stripe webhook:** `https://api.wasup.app/api/stripe/webhook` (event: `checkout.session.completed`)
 
 ---
 
 ## 4. Desktop installer
 
 ```powershell
-set DESK_LICENSE_SERVER_URL=https://api.wasup.com
-set DESK_MARKETING_ORIGIN=https://wasup.com
+set DESK_LICENSE_SERVER_URL=https://api.wasup.app
+set DESK_MARKETING_ORIGIN=https://wasup.app
 npm run dist:win
 ```
 

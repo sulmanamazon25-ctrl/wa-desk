@@ -6,14 +6,14 @@ NODE_ENV=production
 PORT=3025
 HOSTNAME=0.0.0.0
 
-# IP phase (before wasup.com)
-NEXT_PUBLIC_APP_URL=http://46.62.226.89:3025
-NEXT_PUBLIC_API_ORIGIN=http://194.9.62.143:3025
-NEXT_PUBLIC_DOWNLOAD_URL=http://46.62.226.89:3025/download
+# Domain phase (wasup.app + SSL)
+NEXT_PUBLIC_APP_URL=https://wasup.app
+NEXT_PUBLIC_API_ORIGIN=https://api.wasup.app
+NEXT_PUBLIC_DOWNLOAD_URL=https://wasup.app/download
 
-# Domain phase (after wasup.com + SSL) — uncomment and redeploy:
-# NEXT_PUBLIC_APP_URL=https://wasup.com
-# NEXT_PUBLIC_API_ORIGIN=https://api.wasup.com
-# NEXT_PUBLIC_DOWNLOAD_URL=https://wasup.com/download
+# IP phase (fallback before domain/SSL) — comment out domain vars above and use these:
+# NEXT_PUBLIC_APP_URL=http://46.62.226.89:3025
+# NEXT_PUBLIC_API_ORIGIN=http://194.9.62.143:3025
+# NEXT_PUBLIC_DOWNLOAD_URL=http://46.62.226.89:3025/download
 
 # NEXT_PUBLIC_CRISP_WEBSITE_ID=

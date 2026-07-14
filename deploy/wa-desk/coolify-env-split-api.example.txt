@@ -8,10 +8,10 @@ ADMIN_API_KEY=change-me-admin-key
 NODE_ENV=production
 PORT=3025
 HOSTNAME=0.0.0.0
-NEXT_PUBLIC_APP_URL=https://wasup.com
+NEXT_PUBLIC_APP_URL=https://wasup.app
 DATABASE_URL=postgresql://wa_desk:change-me@wa-db:5432/wa_desk
-DOWNLOAD_URL=https://wasup.com/download
-CORS_ALLOWED_ORIGINS=https://wasup.com,http://46.62.226.89:3025
+DOWNLOAD_URL=https://wasup.app/download
+CORS_ALLOWED_ORIGINS=https://wasup.app,https://www.wasup.app
 
 STRIPE_SECRET_KEY=
 STRIPE_WEBHOOK_SECRET=
@@ -20,5 +20,5 @@ STRIPE_PRICE_BUSINESS_YEARLY=
 STRIPE_PRICE_LIFETIME=
 
 RESEND_API_KEY=
-CONTACT_FROM_EMAIL=WhatsApp AI Desk <hello@wasup.com>
-CONTACT_INBOX_EMAIL=support@wasup.com
+CONTACT_FROM_EMAIL=WhatsApp AI Desk <hello@wasup.app>
+CONTACT_INBOX_EMAIL=support@wasup.app

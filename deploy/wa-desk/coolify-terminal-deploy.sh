@@ -18,9 +18,9 @@ ADMIN_API_KEY=ff37fadfde6ecef0d37c98850fc717c6b84024e94ee8c768dd489fab10d5056d
 NODE_ENV=production
 PORT=3025
 HOSTNAME=0.0.0.0
-NEXT_PUBLIC_APP_URL=http://wasup.com
-DOWNLOAD_URL=http://wasup.com/download
-CORS_ALLOWED_ORIGINS=http://46.62.226.89:3025,http://wasup.com
+NEXT_PUBLIC_APP_URL=https://wasup.app
+DOWNLOAD_URL=https://wasup.app/download
+CORS_ALLOWED_ORIGINS=https://wasup.app,https://www.wasup.app
 EOF
 
 systemctl enable docker

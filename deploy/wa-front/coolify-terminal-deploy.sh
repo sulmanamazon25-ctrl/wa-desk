@@ -14,9 +14,9 @@ cat > deploy/wa-front/.env <<'EOF'
 NODE_ENV=production
 PORT=3025
 HOSTNAME=0.0.0.0
-NEXT_PUBLIC_APP_URL=http://46.62.226.89:3025
-NEXT_PUBLIC_API_ORIGIN=http://194.9.62.143:3025
-NEXT_PUBLIC_DOWNLOAD_URL=http://46.62.226.89:3025/download
+NEXT_PUBLIC_APP_URL=https://wasup.app
+NEXT_PUBLIC_API_ORIGIN=https://api.wasup.app
+NEXT_PUBLIC_DOWNLOAD_URL=https://wasup.app/download
 EOF
 
 systemctl enable docker

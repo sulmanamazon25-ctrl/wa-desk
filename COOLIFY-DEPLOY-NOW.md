@@ -65,6 +65,6 @@ Then: Actions → **Deploy to VPS** / **Deploy frontend to 46.62.226.89** → Ru
 
 ---
 
-## 5. wasup.com (when purchased)
+## 5. wasup.app (domain + SSL)
 
 See [DOMAIN-WASUP.md](./DOMAIN-WASUP.md).

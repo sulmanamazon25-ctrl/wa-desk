@@ -16,6 +16,7 @@ export const FOUNDER = {
   portfolioUrl: "https://msulemanhussain.com",
   sameAs: [
     "https://msulemanhussain.com",
+    "https://msulemanhussain.com/products/wasup",
     "https://www.linkedin.com/in/msulemanhussain/",
     "https://x.com/msulemanhussain",
     "https://github.com/msulemanhussain",
